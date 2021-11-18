@@ -36,11 +36,7 @@ Resources:
       - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
+        CidrIp: 0.0.0.0/00
       SecurityGroupEgress:
       - IpProtocol: tcp
         FromPort: 0
@@ -54,14 +50,18 @@ Resources:
           #!/bin/bash
           sudo apt-get update -y
           sudo apt-get install apache2 -y
-          sudo systemctl start apache2.service          
+          sudo systemctl start apache2.service
+          sudo apt install awscli
+          cd /var/www/html
+          wget https://myawschettinad332395431075.s3.amazonaws.com/test.html         
+      
+      
       # ToDo: AMI ID of Ubuntu Linux machine. Too get one, try creating a VM from the web console. 
       ImageId: ami-0279c3b3186e54acd
-      # ToDo: Change the key-pair name, as applicable to you. 
-      KeyName: RamServerCDN
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: t3.medium
+      IamInstanceProfile: EC2S3AccessRole
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
         Ebs:
@@ -126,6 +126,9 @@ Outputs:
 
     WebAppLB: 
         Description: A reference to the created VPC
-        Value: Fn::Join: [ "", [ "http://", !GetAtt <<LoadBalancerResourceName>>.DNSName ] ]
+        Value: !Join [ "", [ "http://", !GetAtt WebAppLB.DNSName , "/test.html" ] ]
         Export:
           Name: !Sub ${EnvironmentName}-LBDNS          
+    
+    
+    
