@@ -10,7 +10,7 @@ orbs:
   welcome: circleci/node@4.7.0
   
 jobs:
-  say-hello:
+  print-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
+          name: "Print hello"
           command: "echo Hello, World!"
 
 # Invoke jobs via workflows
