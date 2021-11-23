@@ -29,9 +29,6 @@ jobs:
       - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    # Dependency
-    requires:
-      - print-hello  
     steps:
       - checkout
       - run:
@@ -46,4 +43,6 @@ workflows:
       - print-hello
   print-world-workflow:
     jobs:
-      - print-world
+      - print-world:
+          # Dependency
+          requires: [print-hello]
