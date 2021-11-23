@@ -41,8 +41,6 @@ workflows:
   print-hello-workflow:
     jobs:
       - print-hello
-  print-world-workflow:
-    jobs:
       - print-world:
           # Dependency
           requires: [print-hello]
