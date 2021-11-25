@@ -34,7 +34,7 @@ jobs:
     #Steps
     steps:
       - checkout
-      - attach_workspace block:
+      - attach_workspace :
           at: .
       - run:
           name: "Print Output File"
