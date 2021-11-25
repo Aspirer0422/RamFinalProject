@@ -49,7 +49,7 @@ jobs:
           command: "return 1"
       - run:
           name: "Print Error"
-          command: "Hello Error !"
+          command: "echo Hello Error !"
           when: on_fail    
   
 
