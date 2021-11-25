@@ -47,6 +47,10 @@ jobs:
       - run:
           name: "Print Output File"
           command: "return 1"
+      - run:
+          name: "Print Error"
+          command: "Hello Error !"
+          when: on_fail    
   
 
 # Invoke jobs via workflows
