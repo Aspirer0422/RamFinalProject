@@ -26,7 +26,19 @@ jobs:
           root: .
           paths:
             - output.txt
-      
+  
+  print_output_file:
+    #Printing Output File stoerd in cache
+    docker:
+      - image:  cimg/base:stable
+    #Steps
+    steps:
+      - checkout
+      - attach_workspace block:
+          at: .
+      - run:
+          name: "Print Output File"
+          command: "cat output.txt"
   
 
 # Invoke jobs via workflows
@@ -35,4 +47,6 @@ workflows:
   save_hello_world_output-workflow:
     jobs:
       - save_hello_world_output
-  
+  print_output_file-workflow:
+    jobs:
+      - print_output_file
