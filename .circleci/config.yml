@@ -23,9 +23,9 @@ jobs:
           name: "Print hello"
           command: "echo Hello, World! > output.txt"
       - persist_to_workspace:
-    root: C:/Users/User/Documents/Udacity/nd9991-c2-Infrastructure-as-Code-v1-master/supporting_material/RamFinalProject
-    paths:
-      - output.txt
+          root: .
+          paths:
+            - output.txt
       
   
 
