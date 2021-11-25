@@ -47,6 +47,6 @@ workflows:
   save_hello_world_output-workflow:
     jobs:
       - save_hello_world_output
-  print_output_file-workflow:
-    jobs:
-      - print_output_file
+      - print_output_file:
+             # Dependency
+          requires: [save_hello_world_output]
