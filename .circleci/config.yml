@@ -10,7 +10,7 @@ orbs:
   welcome: circleci/node@4.7.0
   
 jobs:
-  print-hello:
+  save_hello_world_output:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -21,27 +21,18 @@ jobs:
       - checkout
       - run:
           name: "Print hello"
-          command: "echo Hello, World!"
-  print-world:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+          command: "echo Hello, World! > output.txt"
+      - persist_to_workspace:
+    root: /*
+    paths:
+      - output.txt
       
-    steps:
-      - checkout
-      - run:
-          name: "Print world"
-          command: echo $Environment_Variable
+  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  print-hello-workflow:
+  save_hello_world_output-workflow:
     jobs:
-      - print-hello
-      - print-world:
-          # Dependency
-          requires: [print-hello]
+      - save_hello_world_output
+  
